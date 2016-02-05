@@ -1,3 +1,4 @@
+package LAB_2;
 abstract class ListBase {
 	abstract public void add(int index, Object o);
 	abstract public void add(Object o);

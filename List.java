@@ -1,4 +1,4 @@
-
+package LAB_2;
 public class List extends ListBase {
 
 	public List() {

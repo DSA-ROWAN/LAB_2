@@ -1,4 +1,4 @@
-package lab_2;
+package LAB_2;
 
 public class Song {
 
