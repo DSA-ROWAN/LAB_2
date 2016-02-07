@@ -2,12 +2,16 @@ public class Node {
 	protected Node _next = null;
 	public Object self = null;
 
-	public Node(Node next){
-		 _next = next;
+	public Node(){
+		
 	}
 	
-	public Node(Object o, Node next){
-		_next =  next;
+	public Node(Node prev){
+		this.add(prev);
+	}
+	
+	public Node(Object o, Node prev){
+		this.add(prev);
 		self =  o;
 	}
 	

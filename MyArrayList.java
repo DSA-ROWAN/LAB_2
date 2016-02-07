@@ -1,7 +1,7 @@
-public class MyArrayList extends List {
+//public class MyArrayList extends List {
 
-	public MyArrayList() {
+//	public MyArrayList() {
 		// TODO Auto-generated constructor stub
-	}
+	//}
 
-}
+//}
