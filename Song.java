@@ -1,5 +1,3 @@
-package LAB_2;
-
 public class Song {
 
 	String name, artist;

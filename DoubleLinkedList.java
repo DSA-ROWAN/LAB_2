@@ -1,4 +1,3 @@
-package LAB_2;
 public class DoubleLinkedList extends LinkedList {
 
 	public DoubleLinkedList() {
