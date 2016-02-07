@@ -1,4 +1,3 @@
-package LAB_2;
 public class MyArrayList extends List {
 
 	public MyArrayList() {
