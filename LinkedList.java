@@ -1,28 +1,65 @@
-public class LinkedList extends List {
+public class LinkedList<T> extends List<T> {
 
-	int size = 0;
-	Node head = new Node();
-	Node end = new Node();
+	private int size = 0;
+	private Node<T> head = new Node<T>();
+	private Node<T> end = new Node<T>();
 	
 	public LinkedList() {
 		head.setNext(end);
 		end.setNext(head);
+		
+		head.self = "ERROR";
+		end.self = "ERROR";
 	}
 	
 	@Override
-	protected Node _add(int index, Object o) {
-		Node nodeToAdd = new Node(o, this.getNodeAt(index));
+	protected Node<T> _add(int index, T o) {		
+		Node<T> nodeToAdd = new Node<T>(o, this.getNodeAt(index));
+		size++;
 		return nodeToAdd;
 	}
 
 	@Override
-	protected Node _add(Object o) {
-		return this._add(size, o);
+	protected Node<T> _add(T o) {
+		if(size == 0){
+			return this._add(1, o);
+		}else{
+			return this._add(size, o);
+		}
+
 	}
 	
 	@Override
-	protected Node getNode(Object o) {
-		Node curr = head;
+	public  void add(int index, T o) {
+		if(index < 1 || index > size){
+			throw new IndexOutOfBoundsException();
+		}else{
+			this._add(index - 1, o);
+		}
+		
+
+	}
+
+	@Override
+	public  void add(T o) {
+		if(size == 0){
+			this._add(1, o);
+		}else{
+			this._add(size, o);
+		}
+
+	}
+	
+	@Override
+	public void clear() {
+		head.setNext(end);
+		size = 0;
+
+	}
+	
+	@Override
+	protected Node<T> getNode(T o) {
+		Node<T> curr = head;
 		
 		while(curr != end){
 			if(curr.self.equals(o)){
@@ -31,49 +68,33 @@ public class LinkedList extends List {
 				curr = curr.next();
 			}
 		}
-		return null;
+		return curr;
 	}
 
 	@Override
-	protected Node getNodeAt(int index) {
-		Node curr = head;
+	protected Node<T> getNodeAt(int index) {
+		Node<T> curr = head;
 		
-		for(int i = 0; i <= index && curr != end; i++){
+		for(int i = 1; i <= index && curr.next() != end; i++){
 			curr = curr.next();
 		}
+		return curr;
+	}
+	
+	@Override
+	public boolean contains(T o){
+		Node<T> nd = this.getNode(o);
+		if(nd != end){
+			return true;
+		}else{
+			return false;
+		}
 		
-		return curr == end ? null : curr;
-	}
-
-	@Override
-	public  void add(int index, Object o) {
-		this._add(index, this.getNodeAt(index));
-	}
-
-	@Override
-	public  void add(Object o) {
-		this.add(size, o);
 	}
 	
 	@Override
-	public void clear() {
-		head.setNext(end);
-
-	}
-	
-	@Override
-	public Object contains(Object o){
-		return this.getNode(o).self;
-	}
-	
-	@Override
-	public Object get(int index){
-		return this.getNodeAt(index).self;
-	}
-
-	@Override
-	public int indexOf(Object o) {
-		Node curr = head;
+	public int indexOf(T o) {
+		Node<T> curr = head;
 		int indx = 0;
 		while(curr != end){
 			if(curr.self.equals(o)){
@@ -93,84 +114,103 @@ public class LinkedList extends List {
 		}else{
 			return false;
 		}
-
 	}
 
 	@Override
-	public void remove(int index) {
-		Node nd = this.getNodeAt(index);
-		Node prev = this.getNodeAt(index-1);
-		if(nd != null){
-			prev.setNext(nd.delete());
-		}
-	}
-
-	@Override
-	public void remove(Object o) {
-		Node nd = this.getNode(o);
-		Node prev = this.getNodeAt(this.indexOf(o));
-		if(nd != null){
-			prev.setNext(nd.delete());
-		}
-	}
-
-	@Override
-	public void set(int index, Object element) {
-		Node nd = this.getNodeAt(index);
-		
-		if(nd != null){
-			nd.self = element;
+	public void removeAt(int index) {
+		if(index < 1 || index > size){
+			throw new IndexOutOfBoundsException();
 		}else{
-			nd = this._add(element);
+			Node<T> nd = this.getNodeAt(index);
+			Node<T> prev = this.getNodeAt(index-1);
+			if(nd != null){
+				prev.setNext(nd.delete());
+				size--;
+			}
 		}
-		
+	}
+
+	@Override
+	public void remove(T o) {
+		Node<T> nd = this.getNode(o);
+		Node<T> prev = this.getNodeAt(this.indexOf(o)-1);
+		if(nd != null){
+			prev.setNext(nd.delete());
+			size--;
+		}
+	}
+
+	@Override
+	public void set(int index, T element) {
+		if(index < 1 || index > size){
+			throw new IndexOutOfBoundsException();
+		}else{
+			Node<T> nd = this.getNodeAt(index);
+			
+			if(nd != null){
+				nd.self = element;
+			}else{
+				nd = this._add(element);
+			}
+		}
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")// This is ok because we check each type as they come in.
+	public T get(int index){	
+		if(index < 1 || index > size){
+			throw new IndexOutOfBoundsException();
+		}else{
+			return (T)this.getNodeAt(index).self;
+		}
 	}
 
 	@Override
 	public int size() {
 		return size;
-
 	}
 
 	@Override
-	public List subList(int fromIndex, int toIndex) {
-		LinkedList tmpList = new LinkedList();
-		Node curr = this.getNodeAt(fromIndex);
+	@SuppressWarnings("unchecked")// This is ok because we check each type as they come in.
+	public List<T> subList(int fromIndex, int toIndex) {
 		
-		for(int i = fromIndex; i <= toIndex && curr != end; i++){
-			tmpList._add(curr.self);
-			curr = curr.next();
+		if((fromIndex < 1 || fromIndex > size) || (toIndex < 1 || toIndex > size)){
+			throw new IndexOutOfBoundsException();
+		}else{
+			LinkedList<T> tmpList = new LinkedList<T>();
+			Node<T> curr = this.getNodeAt(fromIndex);
+			
+			for(int i = fromIndex; i <= toIndex && curr != end; i++){
+				tmpList._add((T)curr.self);
+				curr = curr.next();
+			}
+			return tmpList;
 		}
-		
-		return tmpList;
 	}
-
+	
 	@Override
-	public Object[] toArray() {
-		Object[] listArray = new Object[size];
+	@SuppressWarnings("unchecked")// This is ok because we check each type as they come in.
+	public T[] toArray() {
+		T[] listArray = (T[])new Object[size]; // This is ok because we check each type as they come in.
 		
-		Node curr = head;
+		Node<T> curr = head;
 		
 		for(int i = 0; curr.next() != end; i++){
 			curr = curr.next();
-			listArray[i] = curr.self;
+			listArray[i] = (T)curr.self;
 		}
 		return listArray;
 	}
 	
 	public void shift(int pos){
-		
 		pos = (0 + pos) % size;
-		Node ndNewFirst = this.getNodeAt(pos);
-		Node ndNewLast = this.getNodeAt(pos - 1);
-		Node ndOldFirst = head.next();
-		Node ndOldLast = this.getNodeAt(size);
+		Node<T> ndNewFirst = this.getNodeAt(pos);
+		Node<T> ndNewLast = this.getNodeAt(pos - 1);
+		Node<T> ndOldFirst = head.next();
+		Node<T> ndOldLast = this.getNodeAt(size);
 		
 		head.setNext(ndNewFirst);
 		ndNewLast.setNext(end);
-		ndOldLast.setNext(ndOldFirst);
-		
+		ndOldLast.setNext(ndOldFirst);	
 	}
-	
-	
 }

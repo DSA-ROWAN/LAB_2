@@ -1,4 +1,4 @@
-abstract public class List extends ListBase {
+abstract public class List<T> extends ListBase<T> {
 
 
 }

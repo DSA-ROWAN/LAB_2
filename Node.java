@@ -1,36 +1,36 @@
-public class Node {
-	protected Node _next = null;
+public class Node<T> {
+	protected Node<T> _next = null;
 	public Object self = null;
 
 	public Node(){
 		
 	}
 	
-	public Node(Node prev){
+	public Node(Node<T> prev){
 		this.add(prev);
 	}
 	
-	public Node(Object o, Node prev){
+	public Node(T o, Node<T> prev){
 		this.add(prev);
 		self =  o;
 	}
 	
-	public Node delete(){
-		Node tmp = _next;
+	public Node<T> delete(){
+		Node<T> tmp = _next;
 		_next = null;
 		return tmp;
 	}
 	
-	public void add(Node nodeToAddAfter){
+	public void add(Node<T> nodeToAddAfter){
 		this.setNext(nodeToAddAfter.next());
 		nodeToAddAfter.setNext(this);
 	}
 		
-	public Node next(){
+	public Node<T> next(){
 		return _next;
 	}
 	
-	public void setNext(Node next){
+	public void setNext(Node<T> next){
 		_next = next;
 	}
 }
