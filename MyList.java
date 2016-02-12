@@ -13,6 +13,6 @@ public interface MyList<T> {
 	public void remove(T o);
 	public void set(int index, T element);
 	public List<T> subList(int fromIndex, int toIndex);
-	public T[] toArray();
+	public Object[] toArray();
 	public void shift(int pos);
 }
