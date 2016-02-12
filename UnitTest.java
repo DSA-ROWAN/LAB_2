@@ -146,5 +146,92 @@ public class UnitTest {
 		assert lst.contains(1234);
 		assert lst.indexOf(1234) == 4;
 		System.out.println("PASS");
+		
+		lst.clear();
+		lst.add(11);
+		lst.add(12);
+		lst.add(13);
+		lst.add(14);
+		lst.add(15);
+		lst.add(16);
+		lst.add(17);
+		lst.add(18);
+		lst.add(19);
+		lst.add(20);
+		
+		System.out.print("Testing subList(): ");
+		List<Integer> newList = lst.subList(1,1);
+		
+		assert newList.size() == 1;
+		assert newList.get(1) == 11;
+		
+		try{
+			newList.get(2);
+			System.out.println("FAIL");
+		}catch(IndexOutOfBoundsException excpt){
+			
+			newList = lst.subList(6,10);
+			
+			assert newList.size() == 5;
+			assert newList.get(3) == 18;
+			
+			try{
+				newList.get(12);
+				System.out.println("FAIL");
+			}catch(IndexOutOfBoundsException excpt2){
+				System.out.println("PASS");
+			}
+		}
+		
+		
+		System.out.print("Testing toArray(): ");
+		
+		Object[] ints = lst.toArray();
+		
+		for(int i = 0; i < ints.length; i++){
+			assert i + 11 == (Integer)ints[i];
+		}
+		
+		System.out.println("PASS");
+		
+		
+		System.out.print("Testing shift(): ");
+		
+		for(int i = 1; i < ints.length; i++){
+			assert i + 10 == lst.get(i);
+		}
+		
+		lst.shift(3);
+		
+		assert 18 == lst.get(1);
+		assert 19 == lst.get(2);
+		assert 20 == lst.get(3);
+		assert 11 == lst.get(4);
+		assert 12 == lst.get(5);
+		assert 13 == lst.get(6);
+		assert 14 == lst.get(7);
+		assert 15 == lst.get(8);
+		assert 16 == lst.get(9);
+		assert 17 == lst.get(10);
+		
+		lst.shift(-3);
+		lst.shift(-3);
+		
+		assert 13 == lst.get(1);
+		assert 14 == lst.get(2);
+		assert 15 == lst.get(3);
+		assert 16 == lst.get(4);
+		assert 17 == lst.get(5);
+		assert 18 == lst.get(6);
+		assert 19 == lst.get(7);
+		assert 20 == lst.get(8);
+		assert 11 == lst.get(9);
+		assert 12 == lst.get(10);
+		
+		
+		System.out.println("PASS");
+		
+		
+		
 	}
 }
