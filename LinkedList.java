@@ -89,7 +89,6 @@ public class LinkedList<T> extends List<T> {
 		}else{
 			return false;
 		}
-		
 	}
 	
 	@Override
