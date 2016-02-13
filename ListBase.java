@@ -5,6 +5,7 @@ abstract class ListBase<T> {
 		return size;
 	}
 
+	@SuppressWarnings("unchecked")// This is ok because we check each type as they come in.
 	public void swap(int postion1, int position2) {
 		if((postion1 < 1 || postion1 > size) || (position2 < 1 || position2 > size)){
 			throw new IndexOutOfBoundsException();

@@ -1,5 +1,5 @@
-
-public class DLNode extends Node {
+/*
+public class DLNode<T> extends Node<T> {
 	private DLNode _prev = null;
 
 	public DLNode(DLNode next, DLNode prev) {
@@ -40,3 +40,4 @@ public class DLNode extends Node {
 	}
 
 }
+*/
