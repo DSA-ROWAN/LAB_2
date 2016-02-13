@@ -30,7 +30,7 @@ public class LinkedList<T> extends List<T> {
 	}
 	
 	@Override
-	public  void add(int index, T o) {
+	public void add(int index, T o) {
 		if(index < 1 || index > size){
 			throw new IndexOutOfBoundsException();
 		}else{
@@ -41,7 +41,7 @@ public class LinkedList<T> extends List<T> {
 	}
 
 	@Override
-	public  void add(T o) {
+	public void add(T o) {
 		if(size == 0){
 			this._add(1, o);
 		}else{
@@ -89,7 +89,6 @@ public class LinkedList<T> extends List<T> {
 		}else{
 			return false;
 		}
-		
 	}
 	
 	@Override
@@ -190,15 +189,16 @@ public class LinkedList<T> extends List<T> {
 	
 	@Override
 	@SuppressWarnings("unchecked")// This is ok because we check each type as they come in.
-	public T[] toArray() {
-		T[] listArray = (T[])new Object[size]; // This is ok because we check each type as they come in.
+	public Object[] toArray() {
+		Object[] listArray = new Object[size]; // This is ok because we check each type as they come in.
 		
 		Node<T> curr = head;
 		
 		for(int i = 0; curr.next() != end; i++){
 			curr = curr.next();
-			listArray[i] = (T)curr.self;
+			listArray[i] = curr.self;
 		}
+		
 		return listArray;
 	}
 	
@@ -209,7 +209,7 @@ public class LinkedList<T> extends List<T> {
 		Node<T> ndOldFirst = head.next();
 		Node<T> ndOldLast = this.getNodeAt(size);
 		
-		head.setNext(ndNewFirst);
+		head.setNext(this.getNodeAt(pos));
 		ndNewLast.setNext(end);
 		ndOldLast.setNext(ndOldFirst);	
 	}

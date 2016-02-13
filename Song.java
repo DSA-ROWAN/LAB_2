@@ -15,8 +15,27 @@ public class Song {
 	public void setArtist(String artist) {
 		this.artist = artist;
 	}
-	private String getPlaytimeString(){
-		return "getPlaytimeString needs to be changed";
+	private String getPlaytimeString(){String time;
+	int sec=0, min=0, hour=0;
+	float temp=playtime;
+	for(int i=0;i<temp;i++){
+		sec++;
+		if(sec>=60){
+			min++;
+			sec=0;
+		}
+		if(min>=60){
+			hour++;
+			min=0;
+		}
+	}
+	if(hour>=1){
+		time=hour+":"+min+":"+sec;
+	}
+	else{
+		time=min+":"+sec;
+	}
+	return time;
 	}
 	public double getPlaytime() {
 		return playtime;
