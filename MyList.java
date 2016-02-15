@@ -1,7 +1,5 @@
 public interface MyList<T> {
 	
-	int size = 0;
-	
 	public void add(int index, T o);
 	public void add(T o);
 	public void clear();

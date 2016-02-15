@@ -1,5 +1,6 @@
 abstract public class List<T> implements MyList<T> {
 
+	protected int size = 0;
 	public int size(){
 		return size;
 	}

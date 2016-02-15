@@ -1,6 +1,6 @@
 public class Node<T> {
 	protected Node<T> _next = null;
-	public Object self = null;
+	public T self = null;
 
 	public Node(){
 		
