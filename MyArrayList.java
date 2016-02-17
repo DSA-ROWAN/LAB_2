@@ -1,10 +1,10 @@
 public class MyArrayList<T> extends List<T> {
 	Object[] values;
 	public MyArrayList() {
-		values=new Object[10];
+		values = new Object[10];
 	}
 	public MyArrayList(int size){
-		values=new Object[size];
+		values = new Object[size];
 	}
 
 	protected  Node<T> getNodeAt(int index){
@@ -13,30 +13,31 @@ public class MyArrayList<T> extends List<T> {
 	
 	@Override
 	public void add(int index, T o) {
+		this.size++;
 		createBiggerArray();
 		makeRoom(index);
-		values[index]= o;
+		values[index] = o;
 	}
 
 	private void createBiggerArray(){
-		Object[]newArray=new Object[size()+1];
-		for(int i=0;i<values.length;i++){
-			newArray[i]= values[i];
+		Object[] newArray = new Object[values.length + 1];
+		for(int i = 0; i < this.size(); i++){
+			newArray[i] = values[i];
 		}
-		values=newArray;
-		
+		values = newArray;
 	}
 	
 	private void makeRoom(int index){
-		for(int i=values.length-1; i>=index;i--){
+		for(int i = values.length-1; i>=index;i--){
 			values[i]=values[i+1]; 
 		}
 	}
 	
 	@Override
 	public void add(T o) {
+		this.size++;
 		createBiggerArray();
-		values[values.length-1]= o;
+		values[this.size() + 1]= o;
 		
 	}
 
@@ -71,8 +72,8 @@ public class MyArrayList<T> extends List<T> {
 
 	@Override
 	public int indexOf(T o) {
-		for(int i=0;i<values.length;i++){
-			T temp=(T)values[i];
+		for(int i = 0; i < values.length; i++){
+			T temp = (T) values[i];
 			if(temp.equals(o)){
 				return i;
 			}
@@ -83,39 +84,41 @@ public class MyArrayList<T> extends List<T> {
 
 	@Override
 	public boolean isEmpty() {
-		if(values.length==0){
+		if(values.length == 0){
 			return true;
 		}
 		return false;
 	}
 
 	private void removeNull(int index){
-		if(index!=-1){
-			Object[]newArray=new Object[size()-1];
-			int counter=0;
-			for(int i=0;i<values.length;i++){
-				if(i==index){
+		if(index != -1){
+			Object[] newArray = new Object[size()-1];
+			int counter = 0;
+			for(int i = 0; i < values.length; i++){
+				if(i == index){
 					//skip this value
 				}
 				else{
-				newArray[counter]= values[i];
-				counter++;
+					newArray[counter] = values[i];
+					counter++;
 				}
 			}
-			values=newArray;
+			values = newArray;
 		}//else: do nothing
 		
 	}
 	
 	@Override
 	public void removeAt(int index) {
-		values[index]=null;
+		this.size--;
+		values[index] = null;
 		removeNull(index);
 	}
 
 	@Override
 
 	public boolean remove(T o) {
+		this.size--;
 		int index=indexOf(o);
 		removeAt(index);
 		return true;
@@ -124,8 +127,8 @@ public class MyArrayList<T> extends List<T> {
 	@Override
 	public void set(int index, Object element) {
 		try{
-			if(element!=null){
-				values[index]=element;
+			if(element != null){
+				values[index] = element;
 			}else{
 				System.err.println("Object cannot be null!");
 			}
@@ -137,8 +140,8 @@ public class MyArrayList<T> extends List<T> {
 
 	@Override
 	public List<T> subList(int fromIndex, int toIndex) {
-		List<T> sublist=new LinkedList<T>();
-		for(int i=fromIndex;i<toIndex;i++){
+		List<T> sublist = new LinkedList<T>();
+		for(int i = fromIndex; i < toIndex; i++){
 			sublist.add((T) values[i]);
 		}
 		return sublist;
@@ -151,12 +154,9 @@ public class MyArrayList<T> extends List<T> {
 
 	@Override
 	public void shift(int pos) {
-		Object[]newValues=new Object[size];
-		for(int i= 0; i<values.length; i++){
-			newValues[(i+pos)%values.length]=values[i];
-		}
-	
-		
+		Object[] newValues = new Object[size];
+		for(int i = 0; i < values.length; i++){
+			newValues[(i+pos) % values.length] = values[i];
+		}	
 	}
-
 }
