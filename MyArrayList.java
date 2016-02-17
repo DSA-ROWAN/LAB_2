@@ -14,9 +14,18 @@ public class MyArrayList<T> extends List<T> {
 		values[index]= o;
 	}
 
+	private void createBiggerArray(){
+		Object[]newArray=new Object[size()+1];
+		for(int i=0;i<values.length;i++){
+			newArray[i]= values[i];
+		}
+		values=newArray;
+		
+	}
+	
 	private void makeRoom(int index){
-		for(int i=0; i<index;i++){
-			
+		for(int i=values.length-1; i>=index;i--){
+			values[i]=values[i+1]; 
 		}
 	}
 	
@@ -29,62 +38,109 @@ public class MyArrayList<T> extends List<T> {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
+		Object[]newArray=new Object[0];
+		values=newArray;
 		
 	}
 
 	@Override
 	public boolean contains(T o) {
-		// TODO Auto-generated method stub
+		for(int i=0;i<values.length;i++){
+			Object temp=values[i];
+			if(temp.equals(o)){
+				return true;
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public T get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+		T temp=(T) values[index];
+		return temp;
+		}catch(ArrayIndexOutOfBoundsException e){
+			System.err.println("ERROR, Index "+index+" does not exist in this list!");
+			return null;
+		}
 	}
 
 	@Override
 	public int indexOf(T o) {
-		// TODO Auto-generated method stub
-		return 0;
+		for(int i=0;i<values.length;i++){
+			T temp=(T)values[i];
+			if(temp.equals(o)){
+				return i;
+			}
+		}
+		System.err.println("ERROR, Object does not exist in this list!");
+		return -1;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
+		if(values.length==0){
+			return true;
+		}
 		return false;
 	}
 
+	private void removeNull(int index){
+		if(index!=-1){
+			Object[]newArray=new Object[size()-1];
+			int counter=0;
+			for(int i=0;i<values.length;i++){
+				if(i==index){
+					//skip this value
+				}
+				else{
+				newArray[counter]= values[i];
+				counter++;
+				}
+			}
+			values=newArray;
+		}//else: do nothing
+		
+	}
+	
 	@Override
 	public void removeAt(int index) {
-		// TODO Auto-generated method stub
-		
+		values[index]=null;
+		removeNull(index);
 	}
 
 	@Override
 	public void remove(T o) {
-		// TODO Auto-generated method stub
-		
+		int index=indexOf(o);
+		removeAt(index);
 	}
 
 	@Override
 	public void set(int index, Object element) {
-		// TODO Auto-generated method stub
+		try{
+			if(element!=null){
+				values[index]=element;
+			}else{
+				System.err.println("Object cannot be null!");
+			}
+		}catch(ArrayIndexOutOfBoundsException e){
+			System.err.println("ERROR, Index "+index+" does not exist");
+		}
 		
 	}
 
 	@Override
-	public List subList(int fromIndex, int toIndex) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<T> subList(int fromIndex, int toIndex) {
+		List<T> sublist=new LinkedList<T>();
+		for(int i=fromIndex;i<toIndex;i++){
+			sublist.add((T) values[i]);
+		}
+		return sublist;
 	}
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		return values;
 	}
 
 	@Override
@@ -96,66 +152,9 @@ public class MyArrayList<T> extends List<T> {
 	
 		
 	}
-	
-	private int getIndexOfFirstNull(){
-		int counter=0;
-		int temp=0;
-		while(temp==0){
-			if(values[counter]!=null){
-				counter++;
-			}
-			else{
-				temp=1;
-			}
-		}
-		
-		return counter;
-		
-	}
-	private int getIndexOfFirstNull(int index){
-		int counter=index;
-		int temp=0;
-		while(temp==0){
-			if(values[counter]!=null){
-				counter++;
-			}
-			else{
-				temp=1;
-			}
-		}
-		
-		return counter;
-		
-	}
-
-	private int getIndexOfFirstElement(){
-		int counter=0;
-		int temp=0;
-		while(temp==0){
-			if(values[counter]==null){
-				counter++;
-			}
-			else{
-				temp=1;
-			}
-		}
-		
-		return counter;
-		
-	}
-	
-	private void createBiggerArray(){
-		Object[]newArray=new Object[size()+1];
-		for(int i=0;i<values.length;i++){
-			newArray[i]= values[i];
-		}
-		values=newArray;
-		
-	}
 
 	@Override
-	protected Node getNode(Object o) {
-		// TODO Auto-generated method stub
+	protected Node getNode(T o) {
 		return null;
 	}
 
@@ -166,13 +165,13 @@ public class MyArrayList<T> extends List<T> {
 	}
 
 	@Override
-	protected Node _add(int index, Object o) {
+	protected Node _add(int index, T o) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected Node _add(Object o) {
+	protected Node _add(T o) {
 		// TODO Auto-generated method stub
 		return null;
 	}
