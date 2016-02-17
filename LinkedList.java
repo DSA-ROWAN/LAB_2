@@ -139,7 +139,7 @@ public class LinkedList<T> extends List<T> {
 	}
 
 	@Override
-	public void remove(T o) {
+	public boolean remove(T o) {
 		Node<T> nd = this.getNode(o);
 		Node<T> prev = this.getNodeAt(this.indexOf(o)-1);
 		if(nd != null){
@@ -148,6 +148,9 @@ public class LinkedList<T> extends List<T> {
 			if(prev.next() == end){
 				updateTail(prev);
 			}
+			return true;
+		}else{
+			return false;
 		}
 	}
 

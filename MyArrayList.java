@@ -64,9 +64,9 @@ public class MyArrayList<T> extends List<T> {
 	}
 
 	@Override
-	public void remove(T o) {
+	public boolean remove(T o) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override

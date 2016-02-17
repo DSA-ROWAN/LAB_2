@@ -8,7 +8,7 @@ public interface MyList<T> {
 	public int indexOf(T o);
 	public boolean isEmpty();
 	public void removeAt(int index);
-	public void remove(T o);
+	public boolean remove(T o);
 	public void set(int index, T element);
 	public List<T> subList(int fromIndex, int toIndex);
 	public Object[] toArray();
