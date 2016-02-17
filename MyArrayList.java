@@ -114,10 +114,16 @@ public class MyArrayList<T> extends List<T> {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public boolean remove(T o) {
 		int index=indexOf(o);
 		removeAt(index);
 		return true;
+=======
+	public void remove(T o) {
+		int index=indexOf(o);
+		removeAt(index);
+>>>>>>> origin/master
 	}
 
 	@Override
@@ -157,5 +163,31 @@ public class MyArrayList<T> extends List<T> {
 	
 		
 	}
+<<<<<<< HEAD
+=======
+
+	@Override
+	protected Node getNode(T o) {
+		return null;
+	}
+
+	@Override
+	protected Node getNodeAt(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Node _add(int index, T o) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Node _add(T o) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+>>>>>>> origin/master
 
 }
