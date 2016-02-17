@@ -12,7 +12,6 @@ public class LinkedList<T> extends List<T> {
 		end.self = (T) "ERROR";
 	}
 	
-	@Override
 	protected Node<T> _add(int index, T o) {		
 		Node<T> nodeToAdd = new Node<T>(o, this.getNodeAt(index));
 		size++;
@@ -28,7 +27,6 @@ public class LinkedList<T> extends List<T> {
 		return;
 	}
 	
-	@Override
 	protected Node<T> _add(T o) {
 		if(size == 0){
 			return this._add(1, o);
@@ -63,7 +61,6 @@ public class LinkedList<T> extends List<T> {
 
 	}
 	
-	@Override
 	protected Node<T> getNode(T o) {
 		Node<T> curr = head;
 		

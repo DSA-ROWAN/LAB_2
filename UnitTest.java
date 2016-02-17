@@ -24,7 +24,8 @@ public class UnitTest {
 		System.out.println("Testing List Class: ");
 		
 		//LinkedList<Integer> lst = new LinkedList<Integer>();
-		CircularLinkedList<Integer> lst = new CircularLinkedList<Integer>();
+		//CircularLinkedList<Integer> lst = new CircularLinkedList<Integer>();
+		MyArrayList<Integer> lst = new MyArrayList<Integer>();
 		
 		System.out.print("	Testing add(object) to end of Linked List: ");
 		lst.add(1);

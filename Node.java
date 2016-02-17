@@ -6,6 +6,10 @@ public class Node<T> {
 		
 	}
 	
+	public Node(T o){
+		self =  o;
+	}
+	
 	public Node(Node<T> prev){
 		this.add(prev);
 	}

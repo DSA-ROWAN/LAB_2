@@ -16,11 +16,7 @@ abstract public class List<T> implements MyList<T> {
 			nd1.self = nd2.self;
 			nd2.self = tmp1;
 		}
-	}
-	
-	abstract protected  Node<T> getNode(T o);        
-	abstract protected  Node<T> getNodeAt(int index);
-	abstract protected  Node<T> _add(int index, T o);
-	abstract protected  Node<T> _add(T o);           
+	}               
+	abstract protected  Node<T> getNodeAt(int index);  
 }
 
