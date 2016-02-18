@@ -21,7 +21,7 @@ public class MyArrayList<T> extends List<T> {
 
 	private void createBiggerArray(){
 		Object[] newArray = new Object[values.length + 1];
-		for(int i = 0; i < this.size(); i++){
+		for(int i = 0; i < values.length; i++){
 			newArray[i] = values[i];
 		}
 		values = newArray;

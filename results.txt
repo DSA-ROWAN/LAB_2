@@ -1,0 +1,28 @@
+Starting Tests for CircularPlayList
+Start Time 42038175ms
+
+Duration of insertion test 19020136ms
+
+Duration of retieval test 668901ms
+
+Duration of swap test 1339590ms
+
+Duration of shift test 2747934ms
+
+End Time for CircularPlayList tests: 72711426ms
+Duration of tests for CircularPlayList 30673251ms
+----------------------------------------------------------
+Starting Tests for LinkedPLayList
+Start Time 80751947ms
+
+Duration of insertion test 19637066ms
+
+Duration of retieval test 663856ms
+
+Duration of swap test 1326892ms
+
+Duration of shift test 2692804ms
+
+End Time for LinkedPLayList tests: 113009371ms
+Duration of tests for LinkedPLayList 32257423ms
+----------------------------------------------------------
